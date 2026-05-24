@@ -20,7 +20,7 @@ export default function LoginPage() {
     const navigate = useNavigate();
     const { login } = useAuth();
 
-    const [username, setUsername] = useState("admin");
+    const [username, setUsername] = useState("carlos.ramirez@uni.edu");
     const [password, setPassword] = useState("admin123");
     const [error, setError] = useState("");
 
@@ -30,7 +30,7 @@ export default function LoginPage() {
 
         try {
             await login(username, password);
-            navigate("/courses");
+            navigate("/iaslab/compu2/911/courses");
         } catch (err) {
             setError("Usuario o contraseña incorrectos.");
         }
@@ -122,7 +122,7 @@ export default function LoginPage() {
                             </Typography>
 
                             <Typography variant="body2">
-                                <strong>admin</strong> / <strong>admin123</strong>
+                                <strong>carlos.ramirez@uni.edu</strong> / <strong>admin123</strong>
                             </Typography>
                         </Box>
                     </CardContent>
