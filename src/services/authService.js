@@ -9,7 +9,7 @@ export async function loginService(username, password) {
     return response.data;
 }
 
-export async function logoutService() {
+export function logoutService() {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
 

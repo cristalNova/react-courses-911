@@ -1,21 +1,27 @@
 import { createContext, useContext, useState } from "react";
-import api from "../api/client";
+import { loginService, logoutService } from "../services/authService.js";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(() => {
         const savedUser = localStorage.getItem("user");
-        return savedUser ? JSON.parse(savedUser) : null;
+
+        try {
+            return savedUser ? JSON.parse(savedUser) : null;
+        } catch (error) {
+            localStorage.removeItem("user");
+            localStorage.removeItem("token");
+            return null;
+        }
     });
 
     const login = async (username, password) => {
-        const response = await api.post("/api/auth/login", {
-            username,
-            password,
-        });
+        const data = await loginService(username, password);
 
-        const data = response.data;
+        if (!data.token) {
+            throw new Error("El backend no envió un token JWT.");
+        }
 
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data));
@@ -26,8 +32,7 @@ export function AuthProvider({ children }) {
     };
 
     const logout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
+        logoutService();
         setUser(null);
     };
 

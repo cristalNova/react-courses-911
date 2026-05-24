@@ -49,7 +49,7 @@ export default function LoginPage() {
             <Container maxWidth="sm">
                 <Card>
                     <CardContent sx={{ p: 5 }}>
-                        <Box textAlign="center" mb={3}>
+                        <Box sx={{ textAlign: "center" }} mb={3}>
                             <Avatar
                                 sx={{
                                     width: 70,
