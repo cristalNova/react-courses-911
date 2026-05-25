@@ -20,8 +20,8 @@ export default function LoginPage() {
     const navigate = useNavigate();
     const { login } = useAuth();
 
-    const [username, setUsername] = useState("admin");
-    const [password, setPassword] = useState("admin123");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
     const handleSubmit = async (event) => {
@@ -30,8 +30,8 @@ export default function LoginPage() {
 
         try {
             await login(username, password);
-            navigate("/courses");
-        } catch (err) {
+            navigate("/iaslab/compu2/911/courses");
+        } catch{
             setError("Usuario o contraseña incorrectos.");
         }
     };
@@ -49,7 +49,7 @@ export default function LoginPage() {
             <Container maxWidth="sm">
                 <Card>
                     <CardContent sx={{ p: 5 }}>
-                        <Box textAlign="center" mb={3}>
+                        <Box sx={{ textAlign: "center" }} mb={3}>
                             <Avatar
                                 sx={{
                                     width: 70,
@@ -122,7 +122,7 @@ export default function LoginPage() {
                             </Typography>
 
                             <Typography variant="body2">
-                                <strong>admin</strong> / <strong>admin123</strong>
+                                <strong>carlos.ramirez@uni.edu</strong> / <strong>admin123</strong>
                             </Typography>
                         </Box>
                     </CardContent>

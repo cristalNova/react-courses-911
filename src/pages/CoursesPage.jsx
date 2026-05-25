@@ -21,7 +21,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import PersonIcon from "@mui/icons-material/Person";
 import GroupsIcon from "@mui/icons-material/Groups";
-import api from "../api/client";
+import { listCourses } from "../services/courseService.js";
 import { useAuth } from "../auth/AuthContext";
 
 export default function CoursesPage() {
@@ -33,8 +33,8 @@ export default function CoursesPage() {
 
     const loadCourses = async () => {
         try {
-            const response = await api.get("/api/courses");
-            setCourses(response.data);
+            const data = await listCourses();
+            setCourses(data);
         } catch (err) {
             setError("No se pudieron cargar los cursos. Verifica el backend o el token.");
         }
@@ -157,22 +157,14 @@ export default function CoursesPage() {
                                             </Typography>
 
                                             <Typography variant="body2" color="text.secondary">
-                                                Código: {course.code}
+                                                Código: {course.id}
                                             </Typography>
                                         </Box>
                                     </Stack>
 
-                                    <Typography
-                                        color="text.secondary"
-                                        sx={{
-                                            minHeight: 48,
-                                            mb: 2,
-                                        }}
-                                    >
-                                        {course.description || "Sin descripción registrada."}
-                                    </Typography>
+                                    <br/>
 
-                                    <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                                    <Stack direction="row" spacing={1} sx={{display: "flex", flexWrap: "wrap"}}>
                                         <Chip
                                             label={`${course.credits} créditos`}
                                             color="primary"
