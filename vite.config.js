@@ -5,11 +5,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': {
-        target: 'http://10.147.19.29:8080',
+      '/auth': {
+        target: 'http://10.147.19.37:8080',
         changeOrigin: true,
         headers: {
-          'Origin': 'http://10.147.19.29:8080'
+          'Origin': 'http://10.147.19.37:8080'
         }
       }
     }

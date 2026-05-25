@@ -21,7 +21,10 @@ export default function CourseFormPage() {
 
     const [form, setForm] = useState({
         name: "",
+        description: "",
+        code: "",
         credits: 3,
+        teacherId: 2,
     });
 
     const [error, setError] = useState("");
@@ -40,17 +43,28 @@ export default function CourseFormPage() {
         try {
             await api.post("/api/courses", {
                 name: form.name,
+                description: form.description,
+                code: form.code,
                 credits: Number(form.credits),
+                teacherId: Number(form.teacherId),
             });
 
             navigate("/courses");
         } catch (err) {
-            if (err.response?.status === 409) {
-                setError("Ya existe un curso con ese código.");
+            console.error("Error creando curso:", err);
+
+            if (err.response?.status === 400) {
+                setError("Datos inválidos. Revisa nombre, descripción, código y créditos.");
+            } else if (err.response?.status === 401) {
+                setError("No estás autenticado. Vuelve a iniciar sesión.");
             } else if (err.response?.status === 403) {
                 setError("No tienes permiso para crear cursos. Usa el usuario admin.");
+            } else if (err.response?.status === 404) {
+                setError("No existe el profesor con ese ID.");
+            } else if (err.response?.status === 409) {
+                setError("Ya existe un curso con ese código.");
             } else {
-                setError("No se pudo crear el curso. Revisa los datos.");
+                setError("No se pudo crear el curso.");
             }
         }
     };
@@ -95,7 +109,27 @@ export default function CourseFormPage() {
                                     onChange={handleChange}
                                 />
 
+                                <TextField
+                                    label="Descripción"
+                                    name="description"
+                                    fullWidth
+                                    required
+                                    multiline
+                                    rows={3}
+                                    value={form.description}
+                                    onChange={handleChange}
+                                />
+
                                 <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
+                                    <TextField
+                                        label="Código"
+                                        name="code"
+                                        fullWidth
+                                        required
+                                        value={form.code}
+                                        onChange={handleChange}
+                                    />
+
                                     <TextField
                                         label="Créditos"
                                         name="credits"
@@ -106,6 +140,17 @@ export default function CourseFormPage() {
                                         onChange={handleChange}
                                     />
                                 </Stack>
+
+                                <TextField
+                                    label="ID del profesor"
+                                    name="teacherId"
+                                    type="number"
+                                    fullWidth
+                                    required
+                                    value={form.teacherId}
+                                    onChange={handleChange}
+                                    helperText="Para probar puedes usar 2, que suele ser el profesor creado por defecto."
+                                />
 
                                 <Stack direction="row" spacing={2} justifyContent="flex-end">
                                     <Button

@@ -30,7 +30,7 @@ export default function LoginPage() {
 
         try {
             await login(username, password);
-            navigate("/iaslab/compu2/911/courses");
+            navigate("/courses");
         } catch{
             setError("Usuario o contraseña incorrectos.");
         }
@@ -122,7 +122,7 @@ export default function LoginPage() {
                             </Typography>
 
                             <Typography variant="body2">
-                                <strong>carlos.ramirez@uni.edu</strong> / <strong>admin123</strong>
+                                <strong>admin</strong> / <strong>admin123</strong>
                             </Typography>
                         </Box>
                     </CardContent>
