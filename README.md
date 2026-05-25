@@ -1,4 +1,13 @@
 # React Courses App
+## Integrantes
+
+| Nombres | Codigos | Usuarios GitHub|
+|---|---|---|
+| Maria Cristina Angulo | A00404067 | @cristalNova |
+| Juan Pablo Serrano | A00404027 | @JP11002 |
+| Samuel Navia | A00405006 | @Numuju |
+|Felipe Calderon | A00404998 | @Philipk84 |
+
 ## Se usó
 
 - React
