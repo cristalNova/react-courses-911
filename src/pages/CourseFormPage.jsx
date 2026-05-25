@@ -21,10 +21,7 @@ export default function CourseFormPage() {
 
     const [form, setForm] = useState({
         name: "",
-        description: "",
-        code: "",
         credits: 3,
-        teacherId: 2,
     });
 
     const [error, setError] = useState("");
@@ -43,10 +40,7 @@ export default function CourseFormPage() {
         try {
             await api.post("/api/courses", {
                 name: form.name,
-                description: form.description,
-                code: form.code,
                 credits: Number(form.credits),
-                teacherId: Number(form.teacherId),
             });
 
             navigate("/courses");
@@ -101,26 +95,7 @@ export default function CourseFormPage() {
                                     onChange={handleChange}
                                 />
 
-                                <TextField
-                                    label="Descripción"
-                                    name="description"
-                                    fullWidth
-                                    multiline
-                                    rows={4}
-                                    value={form.description}
-                                    onChange={handleChange}
-                                />
-
                                 <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
-                                    <TextField
-                                        label="Código"
-                                        name="code"
-                                        fullWidth
-                                        required
-                                        value={form.code}
-                                        onChange={handleChange}
-                                    />
-
                                     <TextField
                                         label="Créditos"
                                         name="credits"
@@ -131,16 +106,6 @@ export default function CourseFormPage() {
                                         onChange={handleChange}
                                     />
                                 </Stack>
-
-                                <TextField
-                                    label="ID del profesor"
-                                    name="teacherId"
-                                    type="number"
-                                    fullWidth
-                                    required
-                                    value={form.teacherId}
-                                    onChange={handleChange}
-                                />
 
                                 <Stack direction="row" spacing={2} justifyContent="flex-end">
                                     <Button

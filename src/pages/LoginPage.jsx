@@ -20,8 +20,8 @@ export default function LoginPage() {
     const navigate = useNavigate();
     const { login } = useAuth();
 
-    const [username, setUsername] = useState("carlos.ramirez@uni.edu");
-    const [password, setPassword] = useState("admin123");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
     const handleSubmit = async (event) => {
@@ -31,7 +31,7 @@ export default function LoginPage() {
         try {
             await login(username, password);
             navigate("/iaslab/compu2/911/courses");
-        } catch (err) {
+        } catch{
             setError("Usuario o contraseña incorrectos.");
         }
     };

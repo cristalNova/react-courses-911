@@ -157,20 +157,12 @@ export default function CoursesPage() {
                                             </Typography>
 
                                             <Typography variant="body2" color="text.secondary">
-                                                Código: {course.code}
+                                                Código: {course.id}
                                             </Typography>
                                         </Box>
                                     </Stack>
 
-                                    <Typography
-                                        color="text.secondary"
-                                        sx={{
-                                            minHeight: 48,
-                                            mb: 2,
-                                        }}
-                                    >
-                                        {course.description || "Sin descripción registrada."}
-                                    </Typography>
+                                    <br/>
 
                                     <Stack direction="row" spacing={1} sx={{display: "flex", flexWrap: "wrap"}}>
                                         <Chip

@@ -1,15 +1,16 @@
-import { createContext, useContext, useState } from "react";
+import {createContext, useContext, useEffect, useState} from "react";
 import { loginService, logoutService } from "../services/authService.js";
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
+
     const [user, setUser] = useState(() => {
         const savedUser = localStorage.getItem("user");
 
         try {
             return savedUser ? JSON.parse(savedUser) : null;
-        } catch (error) {
+        } catch{
             localStorage.removeItem("user");
             localStorage.removeItem("token");
             return null;
