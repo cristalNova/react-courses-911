@@ -38,7 +38,7 @@ const router = createBrowserRouter([
             { path: "*", element: <Navigate to="/courses" replace /> },
         ],
     },
-]);
+], {basename: '/iaslab/compu2/911/'});
 
 export default function App() {
     return <RouterProvider router={router} />;

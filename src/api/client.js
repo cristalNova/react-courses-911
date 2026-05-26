@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "/auth",
+    baseURL: "/iaslab/compu2/911-api",
     headers: {
         "Content-Type": "application/json",
     },
@@ -9,9 +9,14 @@ const api = axios.create({
 
 api.interceptors.request.use((config) => {
     const token = localStorage.getItem("token");
-    if (token) {
+
+    const isLoginRequest = config.url?.includes("/api/auth/login");
+    const isRegisterRequest = config.url?.includes("/api/auth/register");
+
+    if (token && !isLoginRequest && !isRegisterRequest) {
         config.headers.Authorization = `Bearer ${token}`;
     }
+
     return config;
 });
 
